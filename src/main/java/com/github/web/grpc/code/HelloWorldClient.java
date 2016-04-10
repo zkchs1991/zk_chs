@@ -1,4 +1,4 @@
-package com.github.websocket.code;
+package com.github.web.grpc.code;
 
 import com.github.web.grpc.GreeterGrpc;
 import com.github.web.grpc.Helloworld;
