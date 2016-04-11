@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -30,8 +29,7 @@ public class RedisResource {
 
     @RequestMapping(value = "/add", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> add (@RequestParam(value = "key") String key,
-                       @RequestParam(value = "value") String value,
-                       HttpServletRequest request){
+                       @RequestParam(value = "value") String value){
 //        connection.set(key.getBytes(), value.getBytes());
         stringRedisTemplate.opsForValue().set(key, value);
         return M.builder()
