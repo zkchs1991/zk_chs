@@ -10,4 +10,6 @@
 
 3、google：gson、grpc
 
+4、nosql: redis cluster
+
 4、其它：lombok、websocket
