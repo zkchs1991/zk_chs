@@ -1,4 +1,4 @@
-package com.github.repository;
+package com.github.resources;
 
 import com.github.utils.M;
 import org.springframework.beans.factory.annotation.Autowired;

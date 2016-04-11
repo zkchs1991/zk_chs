@@ -1,4 +1,4 @@
-package com.github.repository;
+package com.github.resources;
 
 import com.github.utils.M;
 import org.springframework.web.bind.annotation.RequestMapping;
