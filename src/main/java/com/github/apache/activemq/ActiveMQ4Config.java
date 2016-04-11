@@ -26,7 +26,8 @@ public class ActiveMQ4Config {
                 new ActiveMQConnectionFactory(
                         ActiveMQConnectionFactory.DEFAULT_USER,
                         ActiveMQConnectionFactory.DEFAULT_PASSWORD,
-                        ActiveMQConnectionFactory.DEFAULT_BROKER_URL);
+                        "failover:(tcp://127.0.0.1:61616,tcp://127.0.0.1:61617)");
+//                        ActiveMQConnectionFactory.DEFAULT_BROKER_URL);
         return activeMQConnectionFactory;
     }
 

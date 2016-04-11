@@ -9,6 +9,6 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
  * redis连接配置位置在application.properties中
  */
 @Configuration
-@EnableRedisHttpSession
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800)/** 默认即为1800s */
 public class RedisSessionConfig {
 }
