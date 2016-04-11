@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 option java_package = "web.grpc";
+option java_outer_classname = "TestProto";
 
 package helloworld;
 
@@ -18,4 +19,15 @@ message HelloRequest {
 // The response message containing the greetings
 message HelloReply {
   string message = 1;
+}
+
+message SubMessage {
+  string name = 1;
+}
+
+message SampleMessage {
+  oneof test_oneof {
+    string name = 4;
+    SubMessage sub_message = 9;
+  }
 }
