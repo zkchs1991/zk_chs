@@ -4,7 +4,7 @@
 
 现有的小模块可分为：
 
-1、apache：activemq、zookeeper、kafka
+1、apache：log4j2、activemq、zookeeper、kafka
 
 2、spring：spring-session-data-redis
 
