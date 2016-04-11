@@ -8,6 +8,6 @@
 
 2、spring：spring-session-data-redis
 
-3、google：grpc
+3、google：gson、grpc
 
-4、其它：websocket
+4、其它：lombok、websocket
