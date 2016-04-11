@@ -3,6 +3,7 @@
 采用spring boot，
 
 现有的小模块可分为：
+
 1、apache：activemq、zookeeper、kafka
 
 2、spring：spring-session-data-redis
