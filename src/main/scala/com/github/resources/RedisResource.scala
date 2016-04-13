@@ -16,7 +16,7 @@ class RedisResource @Autowired() (private var stringRedisTemplate: StringRedisTe
 
   @RequestMapping(value = Array("/add"), method = Array(RequestMethod GET, RequestMethod POST))
   def add(@RequestParam(value = "key", required = false) key: String,
-         @RequestParam(value = "value", required = false) value: String) = {
+         @RequestParam(value = "value", required = false) value: String) {
     stringRedisTemplate opsForValue() set (key, value)
     M builder() put("status", "success") put ("key", key) put("value", stringRedisTemplate opsForValue() get key) buildMap()
   }

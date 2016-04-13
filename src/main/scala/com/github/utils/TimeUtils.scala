@@ -10,7 +10,7 @@ object TimeUtils {
   private val simpleDateFormat = new SimpleDateFormat()
 
   @throws(classOf[ParseException])
-  def dateParse (time: String) = {
+  def dateParse (time: String) {
     simpleDateFormat applyPattern "yyyy-MM-dd"
     simpleDateFormat parse time
   }
