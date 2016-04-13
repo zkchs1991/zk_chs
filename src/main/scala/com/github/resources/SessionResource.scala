@@ -16,13 +16,13 @@ import scala.language.postfixOps
 class SessionResource {
 
   @RequestMapping(value = Array("/set"), method = Array(RequestMethod GET, RequestMethod POST))
-  def set(request: HttpServletRequest): util.Map[String, AnyRef] = {
+  def set(request: HttpServletRequest) = {
     request getSession() setAttribute ("session_msg", request getRequestURL)
     M builder() put("result", "success") put ("session_id", request getSession() getId) put ("session_msg", request getRequestURL) buildMap
   }
 
   @RequestMapping(value = Array("/get"), method = Array(RequestMethod GET, RequestMethod POST))
-  def get(request: HttpServletRequest): util.Map[String, AnyRef] =  {
+  def get(request: HttpServletRequest) =  {
     M builder() put ("result", "success") put ("session_id", request getSession() getId) put ("session_msg", request getSession() getAttribute "session_msg") buildMap
   }
 
