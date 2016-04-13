@@ -1,9 +1,12 @@
 package com.github.resources
 
+import java.util
 import javax.servlet.http.HttpServletRequest
 
 import com.github.utils.M
 import org.springframework.web.bind.annotation.{RequestMethod, RequestMapping, RestController}
+
+import scala.language.postfixOps
 
 /**
   * Created by zk_chs on 16/4/13.
@@ -13,14 +16,14 @@ import org.springframework.web.bind.annotation.{RequestMethod, RequestMapping, R
 class SessionResource {
 
   @RequestMapping(value = Array("/set"), method = Array(RequestMethod GET, RequestMethod POST))
-  def set(request: HttpServletRequest) {
+  def set(request: HttpServletRequest): util.Map[String, AnyRef] = {
     request getSession() setAttribute ("session_msg", request getRequestURL)
-    M builder() put("result", "success") put ("session_id", request getSession() getId) put ("session_msg", request getRequestURL) buildMap()
+    M builder() put("result", "success") put ("session_id", request getSession() getId) put ("session_msg", request getRequestURL) buildMap
   }
 
   @RequestMapping(value = Array("/get"), method = Array(RequestMethod GET, RequestMethod POST))
-  def get(request: HttpServletRequest) {
-    M builder() put ("result", "success") put ("session_id", request getSession() getId) put ("session_msg", request getSession() getAttribute "session_msg") buildMap()
+  def get(request: HttpServletRequest): util.Map[String, AnyRef] =  {
+    M builder() put ("result", "success") put ("session_id", request getSession() getId) put ("session_msg", request getSession() getAttribute "session_msg") buildMap
   }
 
 }
