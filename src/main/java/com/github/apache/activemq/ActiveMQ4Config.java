@@ -3,16 +3,14 @@ package com.github.apache.activemq;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.jms.annotation.EnableJms;
 
 import javax.jms.Queue;
 
 /**
  * Created by zk_chs on 16/4/9.
  */
-@EnableJms
-@Configuration
+//@EnableJms
+//@Configuration
 public class ActiveMQ4Config {
 
     @Bean

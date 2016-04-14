@@ -3,14 +3,13 @@ package com.github.apache.activemq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.jms.core.JmsMessagingTemplate;
-import org.springframework.stereotype.Component;
 
 import javax.jms.Queue;
 
 /**
  * Created by zk_chs on 16/4/9.
  */
-@Component
+//@Component
 public class Producer implements CommandLineRunner {
 
     @Autowired
