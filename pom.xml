@@ -213,11 +213,11 @@
             <artifactId>akka-agent_2.11</artifactId>
             <version>2.4.2</version>
         </dependency>
-        <dependency>
-            <groupId>com.typesafe.akka</groupId>
-            <artifactId>akka-transactor_2.11</artifactId>
-            <version>2.3.14</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.typesafe.akka</groupId>-->
+            <!--<artifactId>akka-transactor_2.11</artifactId>-->
+            <!--<version>2.3.14</version>-->
+        <!--</dependency>-->
 
         <!-- google -->
         <dependency>
