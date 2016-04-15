@@ -14,4 +14,6 @@
 
 4、nosql: redis cluster
 
-4、其它：lombok、websocket
+5、scala: akka
+
+6、其它：lombok、websocket
