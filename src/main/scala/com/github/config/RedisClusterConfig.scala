@@ -1,6 +1,5 @@
 package com.github.config
 
-import com.github.redis.RedisClusterConfigProperties
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.{Bean, Configuration}
 import org.springframework.data.redis.connection.{RedisClusterConnection, RedisClusterConfiguration, RedisConnectionFactory}
