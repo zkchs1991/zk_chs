@@ -2,7 +2,7 @@
 
 采用spring boot，
 
-只需要修改application.properties文件中的datasource和password即可运行
+只需要修改application.yml文件中的datasource和password即可运行
 
 现有的小模块可分为：
 
