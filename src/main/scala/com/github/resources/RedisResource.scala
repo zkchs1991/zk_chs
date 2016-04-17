@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.{RequestParam, RequestMethod, Req
 import redis.clients.jedis._
 
 import scala.collection.JavaConverters._
+import scala.io.Source
 import scala.language.postfixOps
 
 /**
@@ -96,9 +97,19 @@ object test extends App {
   val jedis = pool getResource()
   val set = jedis zrangeByScore("scoreboard", "89", "+inf", 0, 1)
   set.asScala.foreach(println)
+
 //  jedis.pipelined().exec() pipeline在jedis中的操作
   /** 以jedisCluster进行操作,HostAndPort可以传入多个,防止单个节点挂掉 */
-  val cluster = new JedisCluster(new HostAndPort("127.0.0.1", 7000), poolConfig)
+  val cluster = new JedisCluster(new HostAndPort("127.0.0.1", 6379), poolConfig)
   val set2 = cluster zrangeByScore("scoreboard", "89", "+inf", 0, 2)
   set2.asScala.foreach(println)
+
+  /** redis lua脚本调用 */
+  val keys = new util.ArrayList[String]()
+  val values = new util.ArrayList[String]()
+  val lua = Source fromFile "src/main/resources/lua/ratelimiting.lua" mkString;
+  keys add "rate.limiting:127.0.0.1"
+  values add "10"
+  values add "3"
+  jedis.eval(lua, keys, values)
 }
