@@ -27,7 +27,7 @@ object Example_01 extends App {
   myactor ! 123
 
   // 关闭ActorSystem,停止程序的运行
-  system.terminate()
+  system terminate
 
 }
 

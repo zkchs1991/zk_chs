@@ -2,6 +2,8 @@ package com.github.akka
 
 import akka.actor._
 
+import scala.language.postfixOps
+
 /**
   * Created by zk_chs on 16/4/15.
   */
@@ -51,6 +53,6 @@ object Example_04 extends App{
   Thread.sleep(5000)
 
   // 关闭ActorSystem,停止程序的运行
-  system.terminate()
+  system terminate
 
 }

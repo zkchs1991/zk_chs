@@ -1,10 +1,12 @@
 package com.github.akka
 
-import akka.actor.Actor.Receive
 import akka.actor.{Props, ActorSystem, ActorLogging, Actor}
+
+import scala.language.postfixOps
 
 /**
   * Created by zk_chs on 16/4/15.
+  * unhandled方法
   */
 object Example_05 extends App{
 
@@ -21,7 +23,7 @@ object Example_05 extends App{
   }
 
   val system = ActorSystem("MyActorSystem")
-  val systemLog=system.log
+  val systemLog = system.log
 
   //创建FirstActor对象
   val myactor = system.actorOf(Props[FirstActor], name = "firstActor")
@@ -32,6 +34,6 @@ object Example_05 extends App{
   myactor! 123
   Thread.sleep(5000)
   //关闭ActorSystem，停止程序的运行
-  system.terminate()
+  system terminate
 
 }
