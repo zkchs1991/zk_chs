@@ -10,7 +10,7 @@ import org.springframework.data.redis.core.{DefaultTypedTuple, StringRedisTempla
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple
 import org.springframework.data.redis.core.query.SortQueryBuilder
 import org.springframework.web.bind.annotation.{RequestParam, RequestMethod, RequestMapping, RestController}
-import redis.clients.jedis.{JedisPoolConfig, JedisPool, Jedis}
+import redis.clients.jedis._
 
 import scala.collection.JavaConverters._
 import scala.language.postfixOps
@@ -74,7 +74,8 @@ class RedisResource @Autowired() (private var stringRedisTemplate: StringRedisTe
     val set = new util.HashSet[TypedTuple[String]]()
     val tuple1 = new DefaultTypedTuple[String]("Tom", 89.0)
     val tuple2 = new DefaultTypedTuple[String]("Peter", 67.0)
-    val typed3 = new DefaultTypedTuple[String]("David", 100.0)
+    val tuple3 = new DefaultTypedTuple[String]("David", 100.0)
+    set add tuple1; set add tuple2; set add tuple3
     stringRedisTemplate opsForZSet() add("scoreboard", set)
     val result = stringRedisTemplate opsForZSet() rangeByScore("scoreboard", 89.0, Double.MaxValue, 0, 3)
     result.asScala.foreach(println)
@@ -87,7 +88,6 @@ class RedisResource @Autowired() (private var stringRedisTemplate: StringRedisTe
 
 // 不行的话,就用jedis,把pool加入到bean,然后每次用过bean来获取jedis连接
 object test extends App {
-
   val poolConfig = new JedisPoolConfig
   poolConfig.setMaxIdle(8)
   poolConfig.setMaxTotal(8)
@@ -97,5 +97,8 @@ object test extends App {
   val set = jedis zrangeByScore("scoreboard", "89", "+inf", 0, 1)
   set.asScala.foreach(println)
 //  jedis.pipelined().exec() pipeline在jedis中的操作
-
+  /** 以jedisCluster进行操作,HostAndPort可以传入多个,防止单个节点挂掉 */
+  val cluster = new JedisCluster(new HostAndPort("127.0.0.1", 7000), poolConfig)
+  val set2 = cluster zrangeByScore("scoreboard", "89", "+inf", 0, 2)
+  set2.asScala.foreach(println)
 }
