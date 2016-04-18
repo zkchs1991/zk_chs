@@ -13,7 +13,7 @@ import scala.language.postfixOps
   * Created by zk_chs on 16/4/13.
   */
 @Configuration
-class RedisClusterConfig extends {
+class RedisClusterConfig {
 
   @Autowired
   private var clusterProperties: RedisClusterConfigProperties = _

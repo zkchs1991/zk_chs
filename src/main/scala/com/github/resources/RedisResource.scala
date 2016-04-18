@@ -101,6 +101,7 @@ object test extends App {
 //  jedis.pipelined().exec() pipeline在jedis中的操作
   /** 以jedisCluster进行操作,HostAndPort可以传入多个,防止单个节点挂掉 */
   val cluster = new JedisCluster(new HostAndPort("127.0.0.1", 6379), poolConfig)
+  cluster close()
   val set2 = cluster zrangeByScore("scoreboard", "89", "+inf", 0, 2)
   set2.asScala.foreach(println)
 
@@ -112,4 +113,6 @@ object test extends App {
   values add "10"
   values add "3"
   jedis.eval(lua, keys, values)
+  // 释放连接资源
+  jedis close()
 }
