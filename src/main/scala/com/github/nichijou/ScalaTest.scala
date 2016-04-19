@@ -1,6 +1,7 @@
 package com.github.nichijou
 
 import scala.collection.immutable.Queue
+import scala.language.{postfixOps, implicitConversions}
 import scala.util.Random
 
 /**
@@ -58,5 +59,27 @@ object ScalaTest extends App{
   //  fib数列的前后项比值趋于黄金分割
   def fn(n: Int) = fib(1, 1)(n)
   println(1 to 10 map (n=> 1.0 * fn(n) / fn(n+1)))// Vector(0.5, 0.666, ..., 0.618)
+
+  // 隐式转换===>隐式转换函数
+  implicit def double2Int(x: Double): Int = x.toInt
+  def f(x: Int) = x
+  println(f(3.9))
+
+  // 隐式转换===>隐式参数
+  class Student(var name:String){
+    //利用柯里化函数的定义方式，将函数的参数利用
+    //implicit关键字标识
+    //这样的话，在使用的时候可以不给出implicit对应的参数
+    def formatStudent()(implicit outputFormat: OutputFormat)={
+      outputFormat.first + " " + this.name + " " + outputFormat.second
+    }
+  }
+  class OutputFormat(var first: String,val second: String)
+  //程序中定义的变量outputFormat被称隐式值
+  implicit val outputFormat=new OutputFormat("<<",">>")
+  //在.formatStudent()方法时，编译器会查找类型
+  //为OutputFormat的隐式值,本程序中定义的隐式值
+  //为outputFormat
+  println(new Student("john") formatStudent)
 
 }
