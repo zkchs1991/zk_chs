@@ -1,6 +1,6 @@
 这个仓库主要用来存放平时练习用的代码，基本都是demo级别
 
-采用spring boot，
+采用spring boot
 
 只需要修改application.yml文件中的datasource和password即可运行
 
@@ -16,4 +16,4 @@
 
 5、scala: akka
 
-6、其它：lombok、websocket
+6、其它：lombok、websocket、lua
