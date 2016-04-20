@@ -47,10 +47,10 @@ object Example_07 extends App {
 
   //直接指定其路径
   val myActor2=system.actorSelection("/user/firstActor/myActor")
-  systemLog.info("myActor2 => {}",  myActor2.pathString)
-  //使用相对路径
+  systemLog.info("myActor2 => {}", myActor2.pathString)
+  //使用相对路径,查找同一父监管者下的兄弟
   val myActor3=system.actorSelection("../firstActor/myActor")
-  systemLog.info("myActor3 => {}",  myActor3.pathString)
+  systemLog.info("myActor3 => {}", myActor3.pathString)
 
 
   systemLog.info("准备向myactor发送消息")
