@@ -15,7 +15,7 @@ import scala.language.postfixOps
 class AdminResource @Autowired() (adminRepository: AdminRepository) {
 
   @RequestMapping(method = Array(RequestMethod GET, RequestMethod POST))
-  def get(@RequestParam(value = "id", required = false) id: Int) =  {
+  def get(@RequestParam(value = "id", required = false) id: Int) = {
     if ( id == 0 ) M builder() put ("status", "fail") put ("msg", "id may not be null") buildMap
     else M builder() put("status", "success") put("result", adminRepository findOne id) buildMap
   }
