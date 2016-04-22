@@ -3,6 +3,7 @@ package com.github.nichijou
 /**
   * Created by zk_chs on 16/4/20.
   * 协变与逆变
+  * 方法参数位置为逆变点,方法返回值位置为协变点
   * 关键在于,父类能调用的方法,子类也能调用
   */
 object Variance extends App {
