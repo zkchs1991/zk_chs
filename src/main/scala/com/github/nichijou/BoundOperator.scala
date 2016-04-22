@@ -2,7 +2,7 @@ package com.github.nichijou
 
 /**
   * Created by zk_chs on 16/4/22.
-  * scala operator
+  * scala operator: @
   */
 object BoundOperator extends App {
 

@@ -4,6 +4,7 @@ import scala.language.implicitConversions
 
 /**
   * Created by zk_chs on 16/4/19.
+  * 多重界定
   */
 //noinspection NoReturnTypeForImplicitDef,DeprecatedViewBound
 object MultiBound extends App {
