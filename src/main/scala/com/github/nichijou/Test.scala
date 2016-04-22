@@ -1,6 +1,7 @@
 package com.github.nichijou
 
 import scala.language.{reflectiveCalls, postfixOps}
+import scala.reflect.runtime.universe._
 
 /**
   * Created by zk_chs on 16/4/19.
@@ -74,5 +75,8 @@ object Test extends App {
   releaseMemory(new File)
   //对于单例对象，直接传入单例对象即可
   releaseMemory(File)
+
+  def print2(x:Array[T] forSome {type T})=println(x)
+  def print(x:Array[_])=println(x)
 
 }
