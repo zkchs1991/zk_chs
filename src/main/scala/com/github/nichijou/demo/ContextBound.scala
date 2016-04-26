@@ -1,6 +1,6 @@
-package com.github.nichijou
+package com.github.nichijou.demo
 
-import Ordered.orderingToOrdered
+import scala.Ordered.orderingToOrdered
 
 /**
   * Created by zk_chs on 16/4/19.

@@ -1,7 +1,7 @@
-package com.github.nichijou
+package com.github.nichijou.demo
 
 import scala.collection.immutable.Queue
-import scala.language.{postfixOps, implicitConversions}
+import scala.language.{implicitConversions, postfixOps}
 import scala.util.Random
 
 /**

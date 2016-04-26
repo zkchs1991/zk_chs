@@ -1,4 +1,4 @@
-package com.github.nichijou
+package com.github.nichijou.demo
 
 import scala.reflect.runtime.universe._
 

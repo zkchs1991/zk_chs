@@ -1,6 +1,6 @@
-package com.github.nichijou
+package com.github.nichijou.demo
 
-import com.github.nichijou.ScalaTest.OutputFormat
+import com.github.nichijou.demo.ScalaTest.OutputFormat
 
 import scala.language.implicitConversions
 

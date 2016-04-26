@@ -1,4 +1,4 @@
-package com.github.nichijou
+package com.github.nichijou.demo
 
 /**
   * Created by zk_chs on 16/4/23.

@@ -1,7 +1,7 @@
-package com.github.nichijou
+package com.github.nichijou.demo
 
-import scala.reflect.runtime.universe._
 import scala.reflect._
+import scala.reflect.runtime.universe._
 
 /**
   * Created by zk_chs on 16/4/23.
