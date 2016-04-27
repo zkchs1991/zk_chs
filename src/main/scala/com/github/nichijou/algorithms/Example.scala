@@ -21,4 +21,10 @@ abstract class Example[T <% Ordered[T]] extends App {
     println(a.mkString(" "))
   }
 
+//  scala> import scala.math.Ordering.Implicits._
+//  import scala.math.Ordering.Implicits._
+//
+//  scala> def cmpSome[T: Ordering](x: Option[T], y: Option[T]) = x < y
+//  cmpSome: [T](x: Option[T], y: Option[T])(implicit evidence$1: Ordering[T])Boolean
+
 }
