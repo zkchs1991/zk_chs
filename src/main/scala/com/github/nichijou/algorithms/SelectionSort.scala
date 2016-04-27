@@ -6,9 +6,9 @@ import com.github.nichijou.utils.RandomArr
   * Created by zk_chs on 16/4/26.
   * 选择排序,运行时间和输入无关
   */
-object SelectionSort extends App with Example{
+object SelectionSort extends Example[Char]{
 
-  override def sort(a: Array[Int]) = {
+  override def sort(a: Array[Char]) = {
     val length = a.length
     for (i <- a.indices){ // 与 0 until length 相同
       var min = i
@@ -19,6 +19,8 @@ object SelectionSort extends App with Example{
     show(a)
   }
 
-  sort(RandomArr.shuffle(10))
+  sort("SelectionSort".toArray)
+
+//  sort(RandomArr.shuffle(10))
 
 }

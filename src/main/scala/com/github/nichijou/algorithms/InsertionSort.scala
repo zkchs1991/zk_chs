@@ -6,7 +6,7 @@ import com.github.nichijou.utils.RandomArr
   * Created by zk_chs on 16/4/26.
   * 插入排序,当倒置的数量很少时,插入排序很可能就是最快的排序算法
   */
-object InsertionSort extends App with Example{
+object InsertionSort extends Example[Int]{
 
   override def sort(a: Array[Int]) = {
     val length = a.length

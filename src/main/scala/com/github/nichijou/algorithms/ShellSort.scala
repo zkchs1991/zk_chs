@@ -6,7 +6,7 @@ import com.github.nichijou.utils.RandomArr
   * Created by zk_chs on 16/4/26.
   * 希尔排序,基于插入排序,交换不相邻的元素对数组局部进行排序
   */
-object ShellSort extends App with Example {
+object ShellSort extends Example[Int] {
 
   override def sort(a: Array[Int]) = {
     val length = a.length
