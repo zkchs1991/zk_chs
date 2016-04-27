@@ -22,6 +22,8 @@ object ShellSort extends Example[Int] {
     show(a)
   }
 
-  sort(RandomArr.shuffle(10))
+  val arr = RandomArr.shuffle(10)
+  println(arr.mkString(" "))
+  sort(arr)
 
 }

@@ -3,12 +3,12 @@ package com.github.nichijou.algorithms
 /**
   * Created by zk_chs on 16/4/26.
   */
-abstract class Example[T: Ordering] extends App {
+abstract class Example[T <% Ordered[T]] extends App {
 
   def sort(a: Array[T])
 
-  def less(v: T, w: T)(implicit ordered: Ordering[T]) = {
-    ordered.compare(v, w) < 0
+  def less(v: T, w: T) = {
+    v < w
   }
 
   def exch(a: Array[T], v: Int, w: Int) = {

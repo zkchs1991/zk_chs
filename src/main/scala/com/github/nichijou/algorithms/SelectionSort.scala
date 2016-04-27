@@ -19,6 +19,7 @@ object SelectionSort extends Example[Char]{
     show(a)
   }
 
+  println("SelectionSort".toArray.mkString(" "))
   sort("SelectionSort".toArray)
 
 //  sort(RandomArr.shuffle(10))
