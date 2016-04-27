@@ -6,9 +6,9 @@ import com.github.nichijou.utils.RandomArr
   * Created by zk_chs on 16/4/26.
   * 插入排序,当倒置的数量很少时,插入排序很可能就是最快的排序算法
   */
-object InsertionSort extends Example[Int]{
+object InsertionSort extends Example[Char]{
 
-  override def sort(a: Array[Int]) = {
+  override def sort(a: Array[Char]) = {
     val length = a.length
     for (i <- 1 until length)
       for (j <- i to 1 by -1)
@@ -17,8 +17,15 @@ object InsertionSort extends Example[Int]{
     show(a)
   }
 
-  val arr = RandomArr.shuffle(10)
-  println(arr.mkString(" "))
-  sort(arr)
+//  val arr = RandomArr.shuffle(10)
+//  println(arr.mkString(" "))
+//  sort(arr)
+  val s = "asmnqoakqwnkdksfpqpowqenvsjhsakewqncammxnckjehuiuqwnejkasjncsjakbdqwijncajxkajdkqjwhejnjkxcnajkfbocviuwetiyu"
+  val length = s.length
+  println(s.toArray.mkString(" "))
+  val start = System.currentTimeMillis()
+  sort(s.toArray)
+  val end = System.currentTimeMillis()
+  println("total: " + (end - start))
 
 }
