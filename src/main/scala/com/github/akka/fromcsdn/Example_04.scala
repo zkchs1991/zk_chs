@@ -1,12 +1,13 @@
-package com.github.akka
+package com.github.akka.fromcsdn
 
 import akka.actor._
 
+import scala.language.postfixOps
+
 /**
   * Created by zk_chs on 16/4/15.
-  * Hook方法
   */
-object Example_03 extends App {
+object Example_04 extends App{
 
   class FirstActor extends Actor with ActorLogging {
 
@@ -26,31 +27,15 @@ object Example_03 extends App {
       case x => child ! x; log.info("received " + x)
     }
 
-    // Hook方法,postStop(),Actor停止之后使用
-    @throws[Exception](classOf[Exception])
-    override def postStop(): Unit = {
-      log.info("postStop() in FirstActor")
-    }
-
   }
 
   class MyActor extends Actor with ActorLogging {
 
-    // Hook方法,preStart()方法,Actor启动前调用,用于完成初始化工作
-    @throws[Exception](classOf[Exception])
-    override def preStart(): Unit = {
-      log.info("preStart() in myActor")
-    }
-
+    self ! "message from self reference"
     override def receive: Actor.Receive = {
-      case "test" => log.info("received test")
+      case "test" => log.info("received test");sender() ! "message from MyActor"
+      case "message from self reference" => log.info("message from self reference")
       case _      => log.info("received unknown message")
-    }
-
-    // Hook方法,postStop(),Actor停止之后使用
-    @throws[Exception](classOf[Exception])
-    override def postStop(): Unit = {
-      log.info("postStop() in myActor")
     }
 
   }
@@ -68,7 +53,6 @@ object Example_03 extends App {
   Thread.sleep(5000)
 
   // 关闭ActorSystem,停止程序的运行
-  // FirstActor作为MyActor的Supervisor，会先停止MyActor，再停止自身，因此先调用MyActor的postStop方法，再调用FirstActor的postStop方法。
   system terminate
 
 }

@@ -1,4 +1,4 @@
-package com.github.akka
+package com.github.akka.fromcsdn
 
 import akka.actor._
 

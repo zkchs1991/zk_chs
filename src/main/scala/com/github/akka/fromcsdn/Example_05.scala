@@ -1,6 +1,6 @@
-package com.github.akka
+package com.github.akka.fromcsdn
 
-import akka.actor.{Props, ActorSystem, ActorLogging, Actor}
+import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
 
 import scala.language.postfixOps
 
