@@ -6,7 +6,7 @@ import com.github.nichijou.utils.RandomArr
   * Created by zk_chs on 16/4/27.
   * 归并排序,自顶向下,所需时间与NlogN成正比,缺点为所需的额外空间也与N成正比
   */
-object MergeSort extends Example[Char] {
+object MergeSort extends Example2[Char] {
 
   var aux: Array[Char] = _
 

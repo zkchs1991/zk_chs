@@ -3,13 +3,13 @@ package com.github.nichijou.algorithms
 /**
   * Created by zk_chs on 16/4/28.
   */
-object QuickSort extends Example[Char]{
+object QuickSort extends Example{
 
-  override def sort(a: Array[Char]) = {
+  override def sort[T <% Ordered[T]](a: Array[T]) = {
     sort(a, 0, a.length - 1)
   }
 
-  def sort(a: Array[Char], lo: Int, hi: Int):Unit = {
+  def sort[T <% Ordered[T]](a: Array[T], lo: Int, hi: Int):Unit = {
     if (lo < hi){
       var i = lo
       var j = hi

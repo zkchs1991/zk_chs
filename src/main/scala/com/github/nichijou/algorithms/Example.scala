@@ -3,7 +3,33 @@ package com.github.nichijou.algorithms
 /**
   * Created by zk_chs on 16/4/26.
   */
-abstract class Example[T <% Ordered[T]] extends App {
+abstract class Example extends App {
+
+  def sort[T <% Ordered[T]](a: Array[T])
+
+  def less[T <% Ordered[T]](v: T, w: T) = {
+    v < w
+  }
+
+  def exch[T <% Ordered[T]](a: Array[T], v: Int, w: Int) = {
+    val t = a(v)
+    a(v) = a(w)
+    a(w) = t
+  }
+
+  def show[T <% Ordered[T]](a: Array[T]) = {
+    println(a.mkString(" "))
+  }
+
+//  scala> import scala.math.Ordering.Implicits._
+//  import scala.math.Ordering.Implicits._
+//
+//  scala> def cmpSome[T: Ordering](x: Option[T], y: Option[T]) = x < y
+//  cmpSome: [T](x: Option[T], y: Option[T])(implicit evidence$1: Ordering[T])Boolean
+
+}
+
+abstract class Example2[T <% Ordered[T]] extends App {
 
   def sort(a: Array[T])
 
@@ -20,11 +46,5 @@ abstract class Example[T <% Ordered[T]] extends App {
   def show(a: Array[T]) = {
     println(a.mkString(" "))
   }
-
-//  scala> import scala.math.Ordering.Implicits._
-//  import scala.math.Ordering.Implicits._
-//
-//  scala> def cmpSome[T: Ordering](x: Option[T], y: Option[T]) = x < y
-//  cmpSome: [T](x: Option[T], y: Option[T])(implicit evidence$1: Ordering[T])Boolean
 
 }

@@ -6,7 +6,7 @@ import com.github.nichijou.algorithms.MergeSort._
   * Created by zk_chs on 16/4/27.
   * 归并排序,自底向上,比较适合连标组织的数据
   */
-object MergeBUSort extends Example[Char]{
+object MergeBUSort extends Example2[Char]{
 
   var aux: Array[Char] = _
 
