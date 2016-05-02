@@ -1,6 +1,8 @@
 package com.github.algorithms;
 
-import java.util.Arrays;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 /**
  * Created by zk_chs on 16/4/28.
@@ -37,15 +39,35 @@ public class QuickSort extends Example {
 
     }
 
-    public static void main(String[] args) {
-        Integer[] arr = RandomArr.shuffle(30);
-        System.out.println(Arrays.toString(arr));
+    public static void main(String[] args) throws FileNotFoundException {
+        Integer[] arr = RandomArr.shuffle(30000000);
+//        write(arr, 1);
+//        System.out.println(Arrays.toString(arr));
         QuickSort sort = new QuickSort();
         long start = System.nanoTime();
         sort.sort(arr);
         long end = System.nanoTime();
-        System.out.println(Arrays.toString(arr));
+//        write(arr, 2);
+//        System.out.println(Arrays.toString(arr));
         System.out.println("total: " + (end - start));
+    }
+
+    private static void write (Integer[] arr, int index) throws FileNotFoundException {
+        if (index == 1){
+            File file = new File("/Users/zk_chs/something/sort/quick1.txt");
+            PrintWriter writer = new PrintWriter(file);
+            for (Integer integer : arr){
+                writer.println(integer);
+            }
+            writer.close();
+        } else {
+            File file = new File("/Users/zk_chs/something/sort/quick2.txt");
+            PrintWriter writer = new PrintWriter(file);
+            for (Integer integer : arr){
+                writer.println(integer);
+            }
+            writer.close();
+        }
     }
 
 }
