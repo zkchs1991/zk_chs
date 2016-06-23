@@ -33,10 +33,35 @@ public class RpcClientFactory extends BasePooledObjectFactory<HelloWorldClient> 
         poolConfig.setMaxWaitMillis(-1); // 当连接池资源耗尽时,调用者最大阻塞的时间,超时时抛出异常 单位:毫秒数
         poolConfig.setLifo(true); // 连接池存放池化对象方式,true放在空闲队列最前面,false放在空闲队列最后
         poolConfig.setMinEvictableIdleTimeMillis(1000L * 60L * 30L); // 连接空闲的最小时间,默认即为30分钟
+        poolConfig.setBlockWhenExhausted(true); // 连接耗尽时是否阻塞,默认为true
 
         GenericObjectPool<HelloWorldClient> objectPool = new GenericObjectPool<>(new RpcClientFactory(), poolConfig);
 
-        objectPool.borrowObject();
+        new Thread(make(objectPool)).start();
+        new Thread(make(objectPool)).start();
+        new Thread(make(objectPool)).start();
+        new Thread(make(objectPool)).start();
 
+    }
+
+    private static Runnable make (GenericObjectPool<HelloWorldClient> objectPool){
+        return () -> {
+            HelloWorldClient client = null;
+            try {
+                client = objectPool.borrowObject();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                String user = "world";
+                client.greet(user);
+            } finally {
+                try {
+                    client.shutdown();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
     }
 }

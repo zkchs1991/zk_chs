@@ -13,6 +13,12 @@ public class GreeterImpl implements GreeterGrpc.Greeter{
     public void sayHello(Helloworld.HelloRequest req, StreamObserver<Helloworld.HelloReply> responseObserver) {
         Helloworld.HelloReply reply = Helloworld.HelloReply.newBuilder().setMessage("Hello " + req.getName()).build();
         responseObserver.onNext(reply);
+        System.out.println("HelloWorld Server has receive a message");
+        try {
+            Thread.sleep(1000L * 60L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         responseObserver.onCompleted();
     }
 
