@@ -1,6 +1,6 @@
-package com.github.web.grpc.code;
+package com.github.rpc.grpc.code;
 
-import com.github.web.grpc.GreeterGrpc;
+import com.github.rpc.grpc.GreeterGrpc;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 

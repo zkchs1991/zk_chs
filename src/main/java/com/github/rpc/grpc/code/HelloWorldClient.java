@@ -1,7 +1,7 @@
-package com.github.web.grpc.code;
+package com.github.rpc.grpc.code;
 
-import com.github.web.grpc.GreeterGrpc;
-import com.github.web.grpc.Helloworld;
+import com.github.rpc.grpc.GreeterGrpc;
+import com.github.rpc.grpc.Helloworld;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;

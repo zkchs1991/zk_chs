@@ -1,4 +1,4 @@
-package com.github.web.grpc;
+package com.github.rpc.grpc;
 
 import static io.grpc.MethodDescriptor.*;
 import static io.grpc.stub.ClientCalls.asyncUnaryCall;

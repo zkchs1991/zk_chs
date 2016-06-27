@@ -1,13 +1,13 @@
-package com.github.web.grpc.code;
+package com.github.rpc.grpc.code;
 
-import com.github.web.grpc.GreeterGrpc;
-import com.github.web.grpc.Helloworld;
+import com.github.rpc.grpc.GreeterGrpc;
+import com.github.rpc.grpc.Helloworld;
 import io.grpc.stub.StreamObserver;
 
 /**
  * Created by zk_chs on 16/4/9.
  */
-public class GreeterImpl implements GreeterGrpc.Greeter{
+public class GreeterImpl implements GreeterGrpc.Greeter {
 
     @Override
     public void sayHello(Helloworld.HelloRequest req, StreamObserver<Helloworld.HelloReply> responseObserver) {
