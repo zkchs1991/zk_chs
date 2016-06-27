@@ -25,11 +25,14 @@ public class RpcFramework {
      * @throws Exception the exception
      */
     public static void export(final Object service, int port) throws Exception {
+        /** 验证过程 */
         if (service == null)
             throw new IllegalArgumentException("service instance == null");
         if (port <= 0 || port > 65535)
             throw new IllegalArgumentException("Invalid port " + port);
         System.out.println("Export service " + service.getClass().getName() + " on port " + port);
+
+        /** 开启服务端连接 */
         ServerSocket server = new ServerSocket(port);
         for (; ; ) {
             try {
