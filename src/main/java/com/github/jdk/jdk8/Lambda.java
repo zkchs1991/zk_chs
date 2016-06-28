@@ -1,4 +1,4 @@
-package com.github.jdk8;
+package com.github.jdk.jdk8;
 
 import java.util.ArrayList;
 import java.util.List;
