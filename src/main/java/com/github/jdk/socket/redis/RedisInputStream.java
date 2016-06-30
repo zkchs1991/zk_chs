@@ -7,9 +7,6 @@ import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Created by zk_chs on 16/6/29.
- */
 public class RedisInputStream extends FilterInputStream{
 
     protected final byte[] buf;
@@ -178,6 +175,10 @@ public class RedisInputStream extends FilterInputStream{
         return length;
     }
 
+    /**
+     * This methods assumes there are required bytes to be read. If we cannot read anymore bytes an
+     * exception is thrown to quickly ascertain that the stream was smaller than expected.
+     */
     private void ensureFill() throws JedisConnectionException {
         if (count >= limit) {
             try {
