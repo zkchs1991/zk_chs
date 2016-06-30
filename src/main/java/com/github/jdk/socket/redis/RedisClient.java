@@ -1,5 +1,7 @@
 package com.github.jdk.socket.redis;
 
+import redis.clients.jedis.exceptions.JedisConnectionException;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -15,8 +17,8 @@ public class RedisClient {
     private String ip;
     private int port;
     private Socket socket;
-    private BufferedInputStream input;
-    private OutputStream output;
+    private RedisInputStream input;
+    private RedisOutputStream output;
 
     public RedisClient(String ip, int port){
         this.port = port;
@@ -35,8 +37,8 @@ public class RedisClient {
     public RedisClient connect () {
         try {
             socket = new Socket(ip, port);
-            input = new BufferedInputStream(socket.getInputStream());
-            output = socket.getOutputStream();
+            input = new RedisInputStream(socket.getInputStream());
+            output = new RedisOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             throw new RedisException("some exception throws while connect redis");
         }
@@ -58,33 +60,57 @@ public class RedisClient {
     }
 
     public void keys (String... args) throws IOException {
+
         byte[] command = Const.COMMAND.KEYS.name().getBytes();
-        int length = args.length + 1;
-        int argsLength = args.length;
-        this.bytes[count++] = Const.ASTERISK_BYTE;
-        this.bytes[count++] = '2';
-//        this.bytes[count++] = new Integer(length).byteValue();
-        writeCRLF();
-        this.bytes[count++] = Const.DOUBLE_BYTE;
-//        this.bytes[count++] = new Integer(command.length).byteValue();
-        this.bytes[count++] = '4';
-        writeCRLF();
-        System.arraycopy(command, 0, this.bytes, count, command.length);
-        count += command.length;
-        writeCRLF();
-        for (int i = 0; i < argsLength; i++){
-            this.bytes[count++] = Const.DOUBLE_BYTE;
-//            this.bytes[count++] = new Integer(args[i].length()).byteValue();
-            this.bytes[count++] = 49;
-            this.bytes[count++] = 55;
-            writeCRLF();
-            byte[] argBytes = args[i].getBytes();
-            System.arraycopy(argBytes, 0, bytes, count, argBytes.length);
-            count += argBytes.length;
-            writeCRLF();
+
+        try {
+            this.output.write(Const.ASTERISK_BYTE);
+            this.output.writeIntCrLf(args.length + 1);
+            this.output.write(Const.DOOLAR_BYTE);
+            this.output.writeIntCrLf(command.length);
+            this.output.write(command);
+            this.output.writeCrLf();
+
+            for (final String arg : args) {
+                this.output.write(Const.DOOLAR_BYTE);
+                this.output.writeIntCrLf(arg.getBytes("UTF-8").length);
+                this.output.write(arg.getBytes("UTF-8"));
+                this.output.writeCrLf();
+            }
+        } catch (IOException e) {
+            throw new JedisConnectionException(e);
         }
-        output.write(bytes, 0, count);
-        output.flush();
+
+        output.write(output.buf, 0, output.count);
+
+
+//        byte[] command = Const.COMMAND.KEYS.name().getBytes();
+//        int length = args.length + 1;
+//        int argsLength = args.length;
+//        this.bytes[count++] = Const.ASTERISK_BYTE;
+//        this.bytes[count++] = '2';
+////        this.bytes[count++] = new Integer(length).byteValue();
+//        writeCRLF();
+//        this.bytes[count++] = Const.DOUBLE_BYTE;
+////        this.bytes[count++] = new Integer(command.length).byteValue();
+//        this.bytes[count++] = '4';
+//        writeCRLF();
+//        System.arraycopy(command, 0, this.bytes, count, command.length);
+//        count += command.length;
+//        writeCRLF();
+//        for (int i = 0; i < argsLength; i++){
+//            this.bytes[count++] = Const.DOUBLE_BYTE;
+////            this.bytes[count++] = new Integer(args[i].length()).byteValue();
+//            this.bytes[count++] = 49;
+//            this.bytes[count++] = 55;
+//            writeCRLF();
+//            byte[] argBytes = args[i].getBytes();
+//            System.arraycopy(argBytes, 0, bytes, count, argBytes.length);
+//            count += argBytes.length;
+//            writeCRLF();
+//        }
+//        output.write(bytes, 0, count);
+//        output.flush();
     }
 
     private void writeCRLF() throws IOException {
@@ -92,11 +118,11 @@ public class RedisClient {
         this.bytes[count++] = '\n';
     }
 
-    public BufferedInputStream getInput() {
+    public RedisInputStream getInput() {
         return input;
     }
 
-    public OutputStream getOutput() {
+    public RedisOutputStream getOutput() {
         return output;
     }
 
@@ -105,9 +131,13 @@ public class RedisClient {
         client.keys("1227898377@qq.com");
         int b;
         StringBuilder sb = new StringBuilder();
-        while ((b = client.getInput().read()) != -1){
-            sb.append((char) b);
-        }
+
+        Object object = Protocol.read(client.getInput());
+        System.out.println(object);
+
+//        while ((b = client.getInput().read()) != -1){
+//            sb.append((char) b);
+//        }
         System.out.println(sb);
         client.close();
     }

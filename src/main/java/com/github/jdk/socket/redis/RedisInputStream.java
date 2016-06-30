@@ -1,7 +1,5 @@
 package com.github.jdk.socket.redis;
 
-import redis.clients.jedis.exceptions.JedisConnectionException;
-
 import java.io.ByteArrayOutputStream;
 import java.io.FilterInputStream;
 import java.io.IOException;
@@ -25,7 +23,7 @@ public class RedisInputStream extends FilterInputStream{
         this(in, 8192);
     }
 
-    public byte readByte() throws JedisConnectionException {
+    public byte readByte() throws RedisException {
         ensureFill();
         return buf[count++];
     }
@@ -52,7 +50,7 @@ public class RedisInputStream extends FilterInputStream{
 
         final String reply = sb.toString();
         if (reply.length() == 0) {
-            throw new JedisConnectionException("It seems like server has closed the connection.");
+            throw new RedisException("It seems like server has closed the connection.");
         }
 
         return reply;
@@ -60,7 +58,7 @@ public class RedisInputStream extends FilterInputStream{
 
     public byte[] readLineBytes() {
 
-    /*
+    /**
      * This operation should only require one fill. In that typical case we optimize allocation and
      * copy of the byte array. In the edge case where more than one fill is required then we take a
      * slower path and expand a byte array output stream as is necessary.
@@ -153,7 +151,7 @@ public class RedisInputStream extends FilterInputStream{
                 ensureFill();
 
                 if (buf[count++] != '\n') {
-                    throw new JedisConnectionException("Unexpected character!");
+                    throw new RedisException("Unexpected character!");
                 }
 
                 break;
@@ -166,7 +164,7 @@ public class RedisInputStream extends FilterInputStream{
     }
 
     @Override
-    public int read(byte[] b, int off, int len) throws JedisConnectionException {
+    public int read(byte[] b, int off, int len) throws RedisException {
         ensureFill();
 
         final int length = Math.min(limit - count, len);
@@ -179,16 +177,16 @@ public class RedisInputStream extends FilterInputStream{
      * This methods assumes there are required bytes to be read. If we cannot read anymore bytes an
      * exception is thrown to quickly ascertain that the stream was smaller than expected.
      */
-    private void ensureFill() throws JedisConnectionException {
+    private void ensureFill() throws RedisException {
         if (count >= limit) {
             try {
                 limit = in.read(buf);
                 count = 0;
                 if (limit == -1) {
-                    throw new JedisConnectionException("Unexpected end of stream.");
+                    throw new RedisException("Unexpected end of stream.");
                 }
             } catch (IOException e) {
-                throw new JedisConnectionException(e);
+                throw new RedisException(e);
             }
         }
     }
