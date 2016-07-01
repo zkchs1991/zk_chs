@@ -6,9 +6,6 @@ import redis.clients.jedis.exceptions.JedisConnectionException;
 import java.io.*;
 import java.net.Socket;
 
-/**
- * Created by zk_chs on 16/6/28.
- */
 public class RedisClient {
 
     private byte[] bytes;
@@ -82,7 +79,7 @@ public class RedisClient {
 
         /** 写入缓冲数组并刷新缓冲区 */
         this.output.write(output.buf, 0, output.count);
-        this.output.flush();
+        this.flush();
     }
 
     private void writeCRLF() throws IOException {
