@@ -54,7 +54,8 @@ public class RpcClientFactory extends BasePooledObjectFactory<GrpcClient> {
             }
             try {
                 String req = "world!";
-                client.request(req);
+                String resp = client.request(req);
+                System.out.println(resp);
             } finally {
                 try {
                     client.shutdown();
