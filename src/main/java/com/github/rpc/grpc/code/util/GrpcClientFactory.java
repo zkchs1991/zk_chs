@@ -10,7 +10,7 @@ import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 /**
  * Created by zk_chs on 16/6/23.
  */
-public class RpcClientFactory extends BasePooledObjectFactory<GrpcClient> {
+public class GrpcClientFactory extends BasePooledObjectFactory<GrpcClient> {
 
 
     @Override
@@ -35,7 +35,7 @@ public class RpcClientFactory extends BasePooledObjectFactory<GrpcClient> {
         poolConfig.setMinEvictableIdleTimeMillis(1000L * 60L * 30L); // 连接空闲的最小时间,达到此值后空闲连接可能会被移除,默认即为30分钟
         poolConfig.setBlockWhenExhausted(true); // 连接耗尽时是否阻塞,默认为true
 
-        GenericObjectPool<GrpcClient> objectPool = new GenericObjectPool<>(new RpcClientFactory(), poolConfig);
+        GenericObjectPool<GrpcClient> objectPool = new GenericObjectPool<>(new GrpcClientFactory(), poolConfig);
 
         new Thread(make(objectPool)).start();
         new Thread(make(objectPool)).start();
