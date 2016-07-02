@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 /**
  * Created by zk_chs on 16/6/23.
@@ -39,7 +39,14 @@ public class Lambda {
 
         /** peek 对每个元素执行操作并返回一个新的 Stream */
         result.stream().peek((i) -> System.out.println(i)).collect(toList());
+
+        /** 自定义函数接口用法,下面是两种写法 */
+        Lambda.test(Integer::parseInt);
+        Lambda.test(s -> Integer.parseInt(s));
     }
 
+    private static void test (FuncInterface<String, Integer> testObj){
+        System.out.println(testObj.apply("123456"));
+    }
 
 }
