@@ -30,7 +30,7 @@ public class HelloWorldRpcServiceImpl implements HelloWorldRpcServiceGrpc.HelloW
         /** 自增操作,如果使用注释掉的形式的话,还是会发生线程交互 */
 //        count.incrementAndGet();
 //        System.out.println(count.get());
-        System.out.println(count.incrementAndGet());
+        System.out.println(count.incrementAndGet() + " " + Thread.currentThread().getName());
     }
 
 }

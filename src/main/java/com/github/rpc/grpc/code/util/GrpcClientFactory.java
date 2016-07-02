@@ -7,8 +7,13 @@ import org.apache.commons.pool2.impl.DefaultPooledObject;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
+import java.util.stream.Stream;
+
 /**
- * Created by zk_chs on 16/6/23.
+ * 功能描述：TODO<br/>
+ * 创建时间：2016-7-2<br/>
+ *
+ * @author Zhangkai
  */
 public class GrpcClientFactory extends BasePooledObjectFactory<GrpcClient> {
 
@@ -25,7 +30,9 @@ public class GrpcClientFactory extends BasePooledObjectFactory<GrpcClient> {
 
     public static void main(String[] args) throws Exception {
 
+        /** 连接池的配置 */
         GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
+
         /** 下面的配置均为默认配置,默认配置的参数可以在BaseObjectPoolConfig中找到 */
         poolConfig.setMaxTotal(8); // 池中的最大连接数
         poolConfig.setMinIdle(0); // 最少的空闲连接数
@@ -35,16 +42,17 @@ public class GrpcClientFactory extends BasePooledObjectFactory<GrpcClient> {
         poolConfig.setMinEvictableIdleTimeMillis(1000L * 60L * 30L); // 连接空闲的最小时间,达到此值后空闲连接可能会被移除,默认即为30分钟
         poolConfig.setBlockWhenExhausted(true); // 连接耗尽时是否阻塞,默认为true
 
+        /** 连接池创建 */
         GenericObjectPool<GrpcClient> objectPool = new GenericObjectPool<>(new GrpcClientFactory(), poolConfig);
 
-        new Thread(make(objectPool)).start();
-        new Thread(make(objectPool)).start();
-        new Thread(make(objectPool)).start();
-        new Thread(make(objectPool)).start();
+        int taskCounts = 15;
+        Stream.iterate(1, i -> i + 1)
+                .limit(taskCounts)
+                .forEach(i -> new Thread(makeTask(objectPool, i)).start());
 
     }
 
-    private static Runnable make (GenericObjectPool<GrpcClient> objectPool){
+    private static Runnable makeTask(GenericObjectPool<GrpcClient> objectPool, int i){
         return () -> {
             GrpcClient client = null;
             try {
@@ -55,13 +63,10 @@ public class GrpcClientFactory extends BasePooledObjectFactory<GrpcClient> {
             try {
                 String req = "world!";
                 String resp = client.request(req);
-                System.out.println(resp);
+                System.out.println(resp + " for task" + i);
             } finally {
-                try {
-                    client.shutdown();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                /** 将连接对象返回给连接池 */
+                objectPool.returnObject(client);
             }
         };
     }
