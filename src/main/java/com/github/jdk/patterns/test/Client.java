@@ -1,5 +1,8 @@
-package com.github.jdk.patterns;
+package com.github.jdk.patterns.test;
 
+import com.github.jdk.patterns.event.ClickEvent;
+import com.github.jdk.patterns.event.Event;
+import com.github.jdk.patterns.source.ClickSource;
 import org.junit.Before;
 import org.junit.Test;
 

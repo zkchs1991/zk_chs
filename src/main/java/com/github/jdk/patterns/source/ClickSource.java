@@ -1,4 +1,7 @@
-package com.github.jdk.patterns;
+package com.github.jdk.patterns.source;
+
+import com.github.jdk.patterns.event.Event;
+import com.github.jdk.patterns.listener.EventListener;
 
 import java.util.LinkedList;
 import java.util.List;

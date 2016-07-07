@@ -1,4 +1,7 @@
-package com.github.jdk.patterns;
+package com.github.jdk.patterns.source;
+
+import com.github.jdk.patterns.event.Event;
+import com.github.jdk.patterns.listener.EventListener;
 
 /**
  * Created by zk_chs on 16/7/7.
