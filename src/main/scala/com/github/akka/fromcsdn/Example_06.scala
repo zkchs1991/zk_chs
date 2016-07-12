@@ -30,7 +30,7 @@ object Example_06 extends App{
       parentActorRef = context.parent
     }
     def receive = {
-      case "test" => log.info("received test");parentActorRef!"message from ParentActorRef"
+      case "test" => log.info("received test"); parentActorRef! "message from ParentActorRef"
       case _      => log.info("received unknown message");
     }
 
@@ -47,10 +47,10 @@ object Example_06 extends App{
   val myActor1 = system.actorSelection(myActorPath)
   systemLog.info("准备向myactor发送消息")
   //向myActor1发送消息
-  myActor1 ! "test"
-  myActor1 ! 123
+  myActor1! "test"
+  myActor1! 123
   Thread.sleep(5000)
   //关闭ActorSystem，停止程序的运行
-  system terminate
+  system.terminate
 
 }

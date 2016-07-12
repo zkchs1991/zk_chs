@@ -13,10 +13,10 @@ object Example_08 extends App {
     var child:ActorRef = context.actorOf(Props[MyActor], name = "myActor")
     def receive = {
       //向child发送PoisonPill停止其运行
-      case "stop"=>child ! PoisonPill
+      case "stop" => child! PoisonPill
       case x =>{
         //向MyActor发送消息
-        child ! x
+        child! x
         log.info("received "+x)
       }
 
@@ -36,15 +36,15 @@ object Example_08 extends App {
     }
   }
   val system = ActorSystem("MyActorSystem")
-  val systemLog=system.log
+  val systemLog = system.log
 
   //创建FirstActor对象
   val firstactor = system.actorOf(Props[FirstActor], name = "firstActor")
 
   systemLog.info("准备向firstactor发送消息")
   //向firstactor发送消息
-  firstactor ! "test"
-  firstactor ! 123
-  firstactor ! "stop"
+  firstactor! "test"
+  firstactor! 123
+  firstactor! "stop"
 
 }

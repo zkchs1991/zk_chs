@@ -8,6 +8,7 @@ import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
 object Example_02 extends App {
 
   class FirstActor extends Actor with ActorLogging {
+    /** 使用context创建actor,那么父节点为消息的发送方 */
     val child = context.actorOf(Props[MyActor], name = "myChild")
     override def receive: Actor.Receive = {
       case x => child ! x; log.info("received " + x)
@@ -24,7 +25,7 @@ object Example_02 extends App {
   val system = ActorSystem("MyActorSystem")
   val systemLog = system.log
 
-  // 创建MyActor,指定actor名称为myactor
+  /** 创建MyActor,指定actor名称为myactor,system创建的actor为顶级actor */
   val myactor = system.actorOf(Props[FirstActor], name = "firstActor")
 
   systemLog.info("准备向myactor发送消息")
@@ -34,6 +35,6 @@ object Example_02 extends App {
   Thread.sleep(5000)
 
   // 关闭ActorSystem,停止程序的运行
-  system terminate
+  system.terminate
 
 }

@@ -69,6 +69,6 @@ object Example_03 extends App {
 
   // 关闭ActorSystem,停止程序的运行
   // FirstActor作为MyActor的Supervisor，会先停止MyActor，再停止自身，因此先调用MyActor的postStop方法，再调用FirstActor的postStop方法。
-  system terminate
+  system.terminate
 
 }

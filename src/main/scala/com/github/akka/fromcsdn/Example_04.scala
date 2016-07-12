@@ -30,7 +30,7 @@ object Example_04 extends App{
   }
 
   class MyActor extends Actor with ActorLogging {
-
+    /** 给自己发送消息 */
     self ! "message from self reference"
     override def receive: Actor.Receive = {
       case "test" => log.info("received test");sender() ! "message from MyActor"
@@ -53,6 +53,6 @@ object Example_04 extends App{
   Thread.sleep(5000)
 
   // 关闭ActorSystem,停止程序的运行
-  system terminate
+  system.terminate
 
 }

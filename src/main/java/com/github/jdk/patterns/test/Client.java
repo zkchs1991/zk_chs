@@ -1,7 +1,10 @@
 package com.github.jdk.patterns.test;
 
 import com.github.jdk.patterns.event.ClickEvent;
+import com.github.jdk.patterns.event.DblClickEvent;
 import com.github.jdk.patterns.event.Event;
+import com.github.jdk.patterns.listener.ClickEventListener;
+import com.github.jdk.patterns.listener.DblClickEventListener;
 import com.github.jdk.patterns.source.ClickSource;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,14 +21,25 @@ public class Client {
     @Before
     public void init (){
         clickSource = new ClickSource();
-        clickSource.addEventListener(event -> System.out.println("click!"));
-        clickSource.addEventListener(event -> System.out.println("click!"));
-        clickSource.addEventListener(event -> System.out.println("click!"));
+        clickSource.addEventListener(new ClickEventListener() {
+            @Override
+            public void handleEvent(ClickEvent event) {
+                System.out.println("click!");
+            }
+        });
+        clickSource.addEventListener(new DblClickEventListener() {
+            @Override
+            public void handleEvent(DblClickEvent event) {
+                System.out.println("double Click!");
+            }
+        });
     }
 
     @Test
     public void testClick (){
         currentEvent = new ClickEvent();
+        clickSource.notifyListeners(currentEvent);
+        currentEvent = new DblClickEvent();
         clickSource.notifyListeners(currentEvent);
     }
 

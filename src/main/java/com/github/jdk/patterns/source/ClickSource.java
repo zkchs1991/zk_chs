@@ -26,7 +26,12 @@ public class ClickSource implements EventSource {
     @Override
     public void notifyListeners(Event event) {
         for (EventListener listener : listeners){
-            listener.handleEvent(event);
+            try {
+                listener.handleEvent(event);
+            } catch (ClassCastException e){
+                e.printStackTrace();
+            }
+
         }
     }
 

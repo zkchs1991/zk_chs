@@ -19,7 +19,7 @@ object Example_07 extends App {
     }
     def receive = {
       //向MyActor发送消息
-      case x => child ! x;log.info("received "+x)
+      case x => child! x; log.info("received " + x)
     }
   }
 
@@ -55,10 +55,10 @@ object Example_07 extends App {
 
   systemLog.info("准备向myactor发送消息")
   //向myActor1发送消息
-  myActor1 ! "test"
-  myActor1 ! 123
+  myActor1! "test"
+  myActor1! 123
   Thread.sleep(5000)
   //关闭ActorSystem，停止程序的运行
-  system terminate
+  system.terminate
 
 }
