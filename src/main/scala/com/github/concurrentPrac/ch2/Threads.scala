@@ -12,6 +12,18 @@ object ThreadsMain extends App{
 
 }
 
+object ThreadsStart extends App {
+  class MyThread extends Thread {
+    override def run(): Unit = {
+      println(s"I am ${Thread.currentThread.getName}")
+    }
+  }
+
+  val t = new MyThread()
+  t.start()
+  println(s"I am ${Thread.currentThread.getName}")
+}
+
 object ThreadsCreation extends App{
 
   class MyThread extends Thread {
@@ -80,3 +92,24 @@ object ThreadsUnprotectedUid extends App{
 
 }
 
+object ThreadSharedStateAccessRecording extends App{
+
+  for (i <- 0 until 100000) {
+    var a = false
+    var b = false
+    var x = -1
+    var y = -1
+    val t1 = thread {
+      a = true
+      y = if (b) 0 else 1
+    }
+    val t2 = thread {
+      b = true
+      x = if (a) 0 else 1
+    }
+    t1.join()
+    t2.join()
+    assert(!(x == 1 && y == 1), s"x = $x, y = $y")
+  }
+
+}
