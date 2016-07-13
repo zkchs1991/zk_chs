@@ -16,8 +16,6 @@ import scala.concurrent.Future
   */
 object Example_10 extends App{
 
-
-
   // 消息：个人基础信息
   case class BasicInfo(id: Int, val name: String, age: Int)
   // 消息：个人兴趣信息

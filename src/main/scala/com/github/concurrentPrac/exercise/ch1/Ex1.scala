@@ -1,4 +1,4 @@
-package com.github.concurrentPrac.ch1
+package com.github.concurrentPrac.exercise.ch1
 
 /**
   * Created by zk_chs on 16/7/13.
