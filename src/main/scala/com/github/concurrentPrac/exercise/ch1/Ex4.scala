@@ -32,6 +32,8 @@ object Ex4b extends App {
   }
 
   println(permutations("abba"))
+  val s = "abba"
+  s.foreach(c => println(s.indexOf(c)))
 
 }
 
