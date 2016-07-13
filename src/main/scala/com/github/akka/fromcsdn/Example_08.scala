@@ -10,7 +10,7 @@ object Example_08 extends App {
 
   class FirstActor extends Actor with ActorLogging{
 
-    var child:ActorRef = context.actorOf(Props[MyActor], name = "myActor")
+    var child: ActorRef = context.actorOf(Props[MyActor], name = "myActor")
     def receive = {
       //向child发送PoisonPill停止其运行
       case "stop" => child! PoisonPill
