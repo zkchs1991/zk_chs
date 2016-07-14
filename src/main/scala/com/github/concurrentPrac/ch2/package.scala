@@ -9,7 +9,7 @@ package object ch2 {
     val t = new Thread{
       override def run() = body
     }
-    t.start
+    t.start()
     t
   }
 
