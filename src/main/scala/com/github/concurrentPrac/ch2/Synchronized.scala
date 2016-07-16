@@ -141,7 +141,7 @@ object SynchronizedGracefulShutdown extends App {
 
   Worker.start()
 
-  def asynchronous(body: =>Unit) = tasks.synchronized {
+  def asynchronous(body: => Unit) = tasks.synchronized {
     tasks.enqueue(() => body)
     tasks.notify()
   }
