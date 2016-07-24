@@ -43,6 +43,11 @@ public class Lambda {
         /** 自定义函数接口用法,下面是两种写法 */
         Lambda.test(Integer::parseInt);
         Lambda.test(s -> Integer.parseInt(s));
+
+        /** 跳过指定数量,截取指定数量 */
+        System.out.println(list);
+        System.out.println(list.stream().skip(2).collect(toList()));
+        System.out.println(list.stream().limit(2).collect(toList()));
     }
 
     private static void test (FuncInterface<String, Integer> testObj){
