@@ -20,12 +20,12 @@ public class SystemConfigs {
         System.out.println(System.getProperty("java.library.path")); // 加载库时搜索的路径列表
         System.out.println(System.getProperty("java.io.tmpdir")); // 默认的临时文件路径
         System.out.println(System.getProperty("java.compiler")); // 要使用的 JIT 编译器的名称
-        System.out.println(System.clearProperty("file.separator")); // 文件分隔符（在 UNIX 系统中是“/”）
-        System.out.println(System.clearProperty("path.separator")); // 路径分隔符（在 UNIX 系统中是“:”）
-        System.out.println(System.clearProperty("line.separator")); // 行分隔符（在 UNIX 系统中是“/n”）
-        System.out.println(System.clearProperty("user.name")); // 用户的账户名称
-        System.out.println(System.clearProperty("user.home")); // 用户的主目录
-        System.out.println(System.clearProperty("user.dir")); // 用户的当前工作目录
+        System.out.println(System.getProperty("file.separator")); // 文件分隔符（在 UNIX 系统中是“/”）
+        System.out.println(System.getProperty("path.separator")); // 路径分隔符（在 UNIX 系统中是“:”）
+        System.out.println(System.getProperty("line.separator")); // 行分隔符（在 UNIX 系统中是“/n”）
+        System.out.println(System.getProperty("user.name")); // 用户的账户名称
+        System.out.println(System.getProperty("user.home")); // 用户的主目录
+        System.out.println(System.getProperty("user.dir")); // 用户的当前工作目录
     }
 
 }
