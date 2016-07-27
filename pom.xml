@@ -308,6 +308,13 @@
             <version>2.11.7</version>
         </dependency>
 
+        <!-- Spark -->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.11</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -334,7 +341,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.github.DemoApplication</mainClass>
+                            <mainClass>com.github.spark.SimpleApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

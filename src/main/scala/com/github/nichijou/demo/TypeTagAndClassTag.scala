@@ -22,7 +22,7 @@ object TypeTagAndClassTag extends App {
   //下列语句返回TypeTag[List[Int]]
   println(getTypeTag(List(1, 2, 3)))
 
-  def patternMatch[A : TypeTag](xs: List[A]) = typeOf[A] match {
+  def patternMatch[A: TypeTag](xs: List[A]) = typeOf[A] match {
     //利用类型约束进行精确匹配
     case t if t =:= typeOf[String] => "list of strings"
     case t if t <:< typeOf[Int] => "list of ints"
