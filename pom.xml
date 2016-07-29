@@ -341,7 +341,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.github.spark.SimpleApp</mainClass>
+                            <mainClass>com.github.DemoApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
