@@ -28,6 +28,7 @@ public class PredicateTest {
         Employee e8 = new Employee(8, 79, "M", "Alex", "Gussin");
         Employee e9 = new Employee(9, 15, "F", "Neetu", "Singh");
         Employee e10 = new Employee(10, 45, "M", "Naveen", "Jain");
+        Employee e11 = new Employee(10, 45, "M", "Naveen", "Jain");
 
         List<Employee> employees = new ArrayList<>();
         employees.addAll(Arrays.asList(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10));
@@ -36,6 +37,7 @@ public class PredicateTest {
         System.out.println(filterEmployees(employees, isAdultFemale()));
         System.out.println(filterEmployees(employees, isAgeMoreThan(35)));
         System.out.println(filterEmployees(employees, isAgeMoreThan(35).negate()));
+        System.out.println(filterEmployees(employees, Predicate.isEqual(e11)));
     }
 
 }
