@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -38,6 +39,9 @@ public class PredicateTest {
         System.out.println(filterEmployees(employees, isAgeMoreThan(35)));
         System.out.println(filterEmployees(employees, isAgeMoreThan(35).negate()));
         System.out.println(filterEmployees(employees, Predicate.isEqual(e11)));
+
+        updateEmployeeAge(e10, Predicate.isEqual(e11), (System.out::println));
+        updateEmployeesAge(employees, Predicate.isEqual(e11), (System.out::println));
     }
 
 }
@@ -69,6 +73,19 @@ class EmployeePredicates {
 
     static Predicate<Employee> isAgeMoreThan(Integer age) {
         return p -> p.getAge() > age;
+    }
+
+    static Employee updateEmployeeAge (Employee employee, Predicate<Employee> predicate, Consumer<Employee> consumer){
+        if (predicate.test(employee)){
+            consumer.accept(employee);
+        }
+        return employee;
+    }
+
+    static void updateEmployeesAge (List<Employee> employees, Predicate<Employee> predicate, Consumer<Employee> consumer){
+        employees.stream()
+                .filter(predicate)
+                .forEach(consumer);
     }
 
     static List<Employee> filterEmployees(List<Employee> employees, Predicate<Employee> predicate) {
