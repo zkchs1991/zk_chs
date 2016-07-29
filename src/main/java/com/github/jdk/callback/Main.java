@@ -13,7 +13,7 @@ public class Main {
 
 class TestClassBack {
 
-    public void conpute (int n, ComputeCallBack callBack) throws InterruptedException {
+    void conpute(int n, ComputeCallBack callBack) throws InterruptedException {
         System.out.println("this is n, and callback will run after 1s...");
         Thread.sleep(1000);
         callBack.onCompleteEnd();
