@@ -21,18 +21,8 @@ public class Client {
     @Before
     public void init (){
         clickSource = new ClickSource();
-        clickSource.addEventListener(new ClickEventListener() {
-            @Override
-            public void handleEvent(ClickEvent event) {
-                System.out.println("click!");
-            }
-        });
-        clickSource.addEventListener(new DblClickEventListener() {
-            @Override
-            public void handleEvent(DblClickEvent event) {
-                System.out.println("double Click!");
-            }
-        });
+        clickSource.addEventListener((ClickEventListener) event -> System.out.println("click!"));
+        clickSource.addEventListener((DblClickEventListener) event -> System.out.println("double Click!"));
     }
 
     @Test
