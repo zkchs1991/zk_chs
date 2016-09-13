@@ -7,6 +7,7 @@ class Animal{}
 class Bird extends Animal{}
 class Hummingbird extends Bird{}
 
+/** m1可以记录T的运行时类型 */
 class Consumer[-S, +T]()(implicit m1: ClassTag[T]) {
   /** U以协变类型T为下界,间接地在逆变点使用了协变类型T */
   def m1[U >: T](u: U): T = {m1.runtimeClass.newInstance.asInstanceOf[T]} //协变，下界
