@@ -1,4 +1,4 @@
-package com.github.netty;
+package com.github.netty.server;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
